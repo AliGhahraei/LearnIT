@@ -6,19 +6,29 @@ app.config(function($routeProvider) {
 		templateUrl:'login.html'
 	})
 	.when('/dashboard',{
-		templateUrl:'dashboard.html'
+		resolve: {
+			"check": function($location, $rootScope) {
+				if(!$rootScope.loggedin){
+					$location.path('/');
+				}
+			}
+		},templateUrl:'dashboard.html'
+		
 	})
 	.otherwise({
 		redirectTo: '/'
 	})
 })
 
-app.controller('loginCtrl', function($scope, $location){
+app.controller('loginCtrl', function($scope, $location, $rootScope){
 	$scope.submit = function() {
-		var uname = $scope.username;
+		var uname = $scope.username; //$rootScope es una variable global
 		var password = $scope.password;
 		if (uname == 'admin' && password == 'admin') {
-			$location.path('/dashboard');	
+			$rootScope.loggedin = true;
+			$rootScope.username = uname;
+			$rootScope.password = password;
+			$location.path('/dashboard');
 		}
 		else{
 			alert("Usuario o contraseña incorrecta.");
