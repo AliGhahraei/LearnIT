@@ -25,6 +25,7 @@ def loginUsuario(request):
                     return render(request, 'login/login.html', {'form': form,'error': error}) 
         else:
             form = NameForm()
+        print(form)
         return render(request, 'login/login.html', {'form': form})
 
 def logoutUsuario(request):
