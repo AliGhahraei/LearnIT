@@ -20,6 +20,9 @@ def loginUsuario(request):
                     else:
                         print("The password is valid, but the account has been disabled!")
                         return HttpResponseRedirect('/login/')
+                else:
+                    error = "Usuario y/o contraseña incorrectos. Intente de nuevo, por favor."
+                    return render(request, 'login/login.html', {'form': form,'error': error}) 
         else:
             form = NameForm()
         return render(request, 'login/login.html', {'form': form})
