@@ -1,0 +1,59 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'registro/style.css' %}" />
+<script type="text/javascript" src="{% static 'registro/jquery.js' %}"></script>
+
+{% if error %}
+    <span>{{ error }}</span>    
+{% endif %}
+<div id="fondo">
+<div id="contenido">
+<h2 id="titulo">RATE ME</h2>
+<div id="formulario">
+
+<h3>Registro</h3>
+<form action="/registro/" method="post">
+    {% csrf_token %}
+    
+    {{ formPerfil.non_field_errors }}
+    {{ formUsuario.non_field_errors }}
+    
+    <table>
+        {% for campo in formUsuario %}
+            <tr>
+                <td>
+                    {{ campo.errors }} 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ campo.label_tag }}
+                </td>
+                <td>
+                    {{ campo }}
+                </td>
+            </tr>
+        {% endfor %}
+
+        {% for campo in formPerfil %}
+            <tr>
+                <td>
+                    {{ campo.errors }} 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ campo.label_tag }}
+                </td>
+                <td>
+                    {{ campo }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <input type="submit" value="Submit" />
+</form>
+<br>
+</div>
+</div>
+</div>
