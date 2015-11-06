@@ -8,13 +8,15 @@
 <h2 id="titulo">LearnIT</h2>
 <div id="formulario">
 
-<h3>Registro</h3>
+<h3>Sign up</h3>
 <form action="/registro/" method="post">
     {% csrf_token %}
     
     {{ formPerfil.non_field_errors }}
     {{ formUsuario.non_field_errors }}
-    
+
+    <p><span>*</span>Required field</p>
+
     <table>
         {% for campo in formUsuario %}
             <tr>
@@ -24,7 +26,7 @@
             </tr>
             <tr>
                 <td>
-                    {{ campo.label_tag }}
+                    <span>*</span> {{ campo.label_tag }}
                 </td>
                 <td>
                     {{ campo }}
@@ -40,7 +42,7 @@
             </tr>
             <tr>
                 <td>
-                    {{ campo.label_tag }}
+                    <span>*</span> {{ campo.label_tag }}
                 </td>
                 <td>
                     {{ campo }}
@@ -52,7 +54,7 @@
     <input type="submit" value="Submit" />
     </br>
     </br>
-    ¿Ya tienes cuenta? Inicia sesión <a href="/login/">aquí</a>
+    Already have an account? Log in <a href="/login/">here</a>
 </form>
 <br>
 </div>
