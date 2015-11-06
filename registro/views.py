@@ -1,24 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django import forms
-from django.forms.widgets import PasswordInput, DateInput
+from django.forms.widgets import PasswordInput
 
 from django.forms.models import ModelForm 
-from paginaPrincipal.models import Usuario
+from principal.models import Usuario
 from django.contrib.auth.models import User
 
-paginaPrincipal='/paginaPrincipal'
+paginaPrincipal='/'
 
-class DateInput(DateInput):
-    input_type='date'
 class FormaPerfil(ModelForm):
     class Meta:
         model = Usuario
         exclude = ['formPerfil']
-        fields = ['fechaDeNacimiento','categoria']
-        widgets = {
-            'fechaDeNacimiento': DateInput()
-        }
+        fields = ['carrera']
 class FormaUsuario(ModelForm):
     class Meta:
         model = User

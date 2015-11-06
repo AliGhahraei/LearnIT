@@ -57,7 +57,7 @@ class Ejercicios_Tema(models.Model):
 class Formula(models.Model):
     formula=models.TextField(max_length=500)
 
-class Formulas_Temaa(models.Model):
+class Formulas_Tema(models.Model):
     formula=models.ForeignKey(Formula)
     tema=models.ForeignKey(Tema)
 

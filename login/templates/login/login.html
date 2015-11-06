@@ -1,9 +1,48 @@
+{% load staticfiles %}
 {% if error %}
-    <span>{{ error }}</span><br>    
+    <span>{{ error }}</span>    
 {% endif %}
+<div id="fondo">
+<div id="contenido">
+<h2 id="titulo">LearnIT</h2>
+<div id="formulario">
 
+<h3>Login</h3>
 <form action="/login/" method="post">
     {% csrf_token %}
-    {{ form }}
+    
+    {{ form.non_field_errors }}
+    <table>
+        <tr>
+            <td>
+                {{ form.username.errors }} 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form.username.label_tag }}
+            </td>
+            <td>
+                {{ form.username }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form.password.errors }} 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form.password.label_tag }}
+            </td>
+            <td>
+                {{ form.password }}
+            </td>
+        </tr>
+    </table>
     <input type="submit" value="Submit" />
 </form>
+<br>
+</div>
+</div>
+</div>
