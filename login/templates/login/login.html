@@ -28,34 +28,13 @@
                         {% csrf_token %}
                         
                         {{ form.non_field_errors }}
-                        <table>
-                            <tr>
-                                <td>
-                                    {{ form.username.errors }} 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    {{ form.username.label_tag }}
-                                </td>
-                                <td>
-                                    {{ form.username }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    {{ form.password.errors }} 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    {{ form.password.label_tag }}
-                                </td>
-                                <td>
-                                    {{ form.password }}
-                                </td>
-                            </tr>
-                        </table>
+                        {{ form.username.errors }} 
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                        {{ form.password.errors }} 
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                        
                         <input type="submit" value="Submit" class="ui-btn ui-shadow ui-corner-all" id="logInBtn"/>
                         </br>
                         </br>
