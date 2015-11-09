@@ -1,51 +1,69 @@
-{% load staticfiles %}
+<head>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
+    <script src="{% static 'CodigoJQuery.js '%}"></script> 
+
+    <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+    <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'estilo.css' %}"> 
+
+</head>
 {% if error %}
     <span>{{ error }}</span>    
 {% endif %}
-<div id="fondo">
-<div id="contenido">
-<h2 id="titulo">LearnIT</h2>
-<div id="formulario">
-
-<h3>Login</h3>
-<form action="/login/" method="post">
-    {% csrf_token %}
-    
-    {{ form.non_field_errors }}
-    <table>
-        <tr>
-            <td>
-                {{ form.username.errors }} 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.username.label_tag }}
-            </td>
-            <td>
-                {{ form.username }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.password.errors }} 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.password.label_tag }}
-            </td>
-            <td>
-                {{ form.password }}
-            </td>
-        </tr>
-    </table>
-    <input type="submit" value="Submit" />
-    </br>
-    </br>
-    Don't have an account yet? Get one <a href="/registro/">here</a>
-</form>
-<br>
-</div>
-</div>
-</div>
+<body>
+    <!--loginPage-->
+    <div data-role="page" id="loginPage">
+        <div data-role="header">
+            <h1>LearnIT - Login</h1>
+        </div> <!--/header-->
+        <div role="main" class="ui-content">
+            <div class="ui-grid-b">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+                    <form action="/login/" method="post">
+                        {% csrf_token %}
+                        
+                        {{ form.non_field_errors }}
+                        <table>
+                            <tr>
+                                <td>
+                                    {{ form.username.errors }} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ form.username.label_tag }}
+                                </td>
+                                <td>
+                                    {{ form.username }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ form.password.errors }} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ form.password.label_tag }}
+                                </td>
+                                <td>
+                                    {{ form.password }}
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="submit" value="Submit" class="ui-btn ui-shadow ui-corner-all" id="logInBtn"/>
+                        </br>
+                        </br>
+                        Don't have an account yet? Get one <a href="/registro/">here</a>
+                    </form>
+                </div>
+                <div class="ui-block-c"></div>
+            </div> <!--/grid-b-->
+        </div> <!--/content-->
+    </div> <!--/loginPage-->
+</body>
