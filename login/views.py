@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 
-
 from .forms import NameForm
 
 def loginUsuario(request):
@@ -21,7 +20,7 @@ def loginUsuario(request):
                         print("The password is valid, but the account has been disabled!")
                         return HttpResponseRedirect('/login/')
                 else:
-                    error = "Usuario y/o contraseña incorrectos. Intente de nuevo, por favor."
+                    error = "Invalid username/password"
                     return render(request, 'login/login.html', {'form': form,'error': error}) 
         else:
             form = NameForm()

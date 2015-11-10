@@ -3,7 +3,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
-    <script src="{% static 'CodigoJQuery.js '%}"></script> 
 
     <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
     <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
@@ -11,9 +10,7 @@
     <link rel="stylesheet" href="{% static 'estilo.css' %}"> 
 
 </head>
-{% if error %}
-    <span>{{ error }}</span>    
-{% endif %}
+
 <body>
     <!--loginPage-->
     <div data-role="page" id="loginPage">
@@ -26,12 +23,16 @@
                 <div class="ui-block-b">
                     <form action="/login/" method="post">
                         {% csrf_token %}
+
+                        {% if error %}
+                            <span class=error>{{ error }}</span>    
+                        {% endif %}
                         
                         {{ form.non_field_errors }}
-                        {{ form.username.errors }} 
+                        {{ form.username.errors }}
                         {{ form.username.label_tag }}
                         {{ form.username }}
-                        {{ form.password.errors }} 
+                        {{ form.password.errors }}
                         {{ form.password.label_tag }}
                         {{ form.password }}
                         

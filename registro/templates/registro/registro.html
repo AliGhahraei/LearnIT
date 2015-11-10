@@ -1,62 +1,63 @@
-{% load staticfiles %}
+<head>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% if error %}
-    <span>{{ error }}</span>    
-{% endif %}
-<div id="fondo">
-<div id="contenido">
-<h2 id="titulo">LearnIT</h2>
-<div id="formulario">
+    <script src="{% static 'jquery-2.1.1.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+    <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
 
-<h3>Sign up</h3>
-<form action="/registro/" method="post">
-    {% csrf_token %}
-    
-    {{ formPerfil.non_field_errors }}
-    {{ formUsuario.non_field_errors }}
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">
+</head>
+<body>
+    <div data-role="page">
+	<div data-role="header">
+	    <h1>LearnIT - Sign Up</h1>
+	</div>
+        <div role="main" class="ui-content">
+            <div class="ui-grid-b">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+		    <form action="/registro/" method="post">
+			{% csrf_token %}
 
-    <p><span>*</span>Required field</p>
+			{% if error %}
+			    <span class="error">{{ error }}</span>    
+			{% endif %}
 
-    <table>
-        {% for campo in formUsuario %}
-            <tr>
-                <td>
-                    {{ campo.errors }} 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>*</span> {{ campo.label_tag }}
-                </td>
-                <td>
-                    {{ campo }}
-                </td>
-            </tr>
-        {% endfor %}
+			{{ formPerfil.non_field_errors }}
+			{{ formUsuario.non_field_errors }}
+			<p><span class=error>*</span> Required field</p>
 
-        {% for campo in formPerfil %}
-            <tr>
-                <td>
-                    {{ campo.errors }} 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>*</span> {{ campo.label_tag }}
-                </td>
-                <td>
-                    {{ campo }}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+			{{ formUsuario.username.errors }} 
+			<span class="error">*</span> {{ formUsuario.username.label_tag }}
+			{{ formUsuario.username }}
+                        {{ formUsuario.password.errors }} 
+			<span class="error">*</span> {{ formUsuario.password.label_tag }}
+			{{ formUsuario.password }}
+                        {{ formUsuario.first_name.errors }} 
+			    {{ formUsuario.first_name.label_tag }}
+			{{ formUsuario.first_name }}
+                        {{ formUsuario.last_name.errors }} 
+			    {{ formUsuario.last_name.label_tag }}
+			{{ formUsuario.last_name }}
+                        {{ formUsuario.email.errors }} 
+			<span class="error">*</span> {{ formUsuario.email.label_tag }}
+                        {{ formUsuario.email}}
 
-    <input type="submit" value="Submit" />
-    </br>
-    </br>
-    Already have an account? Log in <a href="/login/">here</a>
-</form>
-<br>
-</div>
-</div>
-</div>
+			{% for campo in formPerfil %}
+			    {{ campo.errors }} 
+                            <span class="error">*</span> {{ campo.label_tag }}
+			    {{ campo }}
+			{% endfor %}
+
+			<input type="submit" value="Submit" />
+			</br>
+			</br>
+			Already have an account? Log in <a href="/login/">here</a>
+	            </form>
+                </div>
+                <div class=ui-block-c"></div>
+            </div>
+        </div>
+    </div>
+</body>

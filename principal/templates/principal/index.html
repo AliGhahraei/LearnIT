@@ -4,15 +4,15 @@
 	<title>Welcome!</title>
         <meta charset="utf-8">
         {% load staticfiles %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
-    <script src="{% static 'CodigoJQuery.js '%}"></script> 
+        <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
+        <script src="{% static 'CodigoJQuery.js '%}"></script> 
 
-    <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
-    <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+        <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
 
-    <link rel="stylesheet" href="{% static 'estilo.css' %}">   
+        <link rel="stylesheet" href="{% static 'estilo.css' %}">   
     </head>
     <body>
 	<div>
@@ -22,8 +22,6 @@
         <!--panelUsuario-->
         <div data-role="panel" id="panelUsuario" data-display="overlay">
             <ul data-role="listview">
-                <li>
-                    <p>L00000000</p>
                 </li>
                 <li data-role="collapsible" data-iconpos="right" data-inset="false">
                     <h2>Curso 1</h2>
@@ -38,21 +36,27 @@
                         <li><a href="nuevoProyecto.html" data-ajax="false">Nuevo Proyecto</a></li>
                     </ul>
                 </li>
-                <li data-icon="delete"><a href="index.html" data-ajax="false">Salir</a></li>
+                <li data-icon="delete"><a href="/login/logout" data-ajax="false">Salir</a></li>
             </ul> <!--listview-->
         </div> <!--Panel-->
 
         <div data-role="header">
-            <h1>Swift - </h1>
+            <h1>LearnIT</h1>
             <a href="#panelUsuario" data-icon="bullets">Opciones</a>
         </div><!-- /header -->
 
         <div role="main" class="ui-content">
-        <h1>Welcome!</h1>
-            <form action="/login/logout">
-                <input type="submit" value="Log out">
-            </form>
-        </div><!-- /content -->
+            <div class="ui-grid-b">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+                    <h1>LearnIT - Inicio</h1>
+                    <form>
+                        <input type="submit" value="No hacer nada">
+                    </form>
+                </div>
+                <div class="ui-block-c"></div>
+            </div>
+        </div>
 
     </div> <!--/mainPage-->
             
