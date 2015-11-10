@@ -29,11 +29,12 @@
                         {% endif %}
                         
                         {{ form.non_field_errors }}
-                        {{ form.username.errors }}
+
                         {{ form.username.label_tag }}
+                        {{ form.username.errors }}
                         {{ form.username }}
-                        {{ form.password.errors }}
                         {{ form.password.label_tag }}
+                        {{ form.password.errors }}
                         {{ form.password }}
                         
                         <input type="submit" value="Submit" class="ui-btn ui-shadow ui-corner-all" id="logInBtn"/>
