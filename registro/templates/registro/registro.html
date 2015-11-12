@@ -26,26 +26,17 @@
 
 			{{ formPerfil.non_field_errors }}
 			{{ formUsuario.non_field_errors }}
+
 			<p><span class=error>*</span> Required field</p>
 
-			<span class="error">*</span> {{ formUsuario.username.label_tag }}
-			{{ formUsuario.username.errors }} 
-			{{ formUsuario.username }}
-			<span class="error">*</span> {{ formUsuario.password.label_tag }}
-                        {{ formUsuario.password.errors }} 
-			{{ formUsuario.password }}
-                        {{ formUsuario.first_name.label_tag }}
-                        {{ formUsuario.first_name.errors }} 
-			{{ formUsuario.first_name }}
-			{{ formUsuario.last_name.label_tag }}
-                        {{ formUsuario.last_name.errors }} 
-			{{ formUsuario.last_name }}
-			{{ formUsuario.email.label_tag }}
-                        {{ formUsuario.email.errors }} 
-                        {{ formUsuario.email}}
+                        {% for campo in formUsuario %}
+			    {{ campo.label_tag }}
+			    {{ campo.errors }} 
+			    {{ campo }}
+                        {% endfor %}
 
 			{% for campo in formPerfil %}
-                            <span class="error">*</span> {{ campo.label_tag }}
+                            {{ campo.label_tag }}
 			    {{ campo.errors }} 
 			    {{ campo }}
 			{% endfor %}
