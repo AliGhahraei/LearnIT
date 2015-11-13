@@ -16,7 +16,7 @@ así como a todos los otros atributos y métodos de esta
 """
 
 class Carrera(models.Model):
-    carrera=models.CharField("Major",max_length=40)
+    carrera=models.CharField("Major",max_length=60)
     def __str__(self):
         return self.carrera
 
