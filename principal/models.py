@@ -65,7 +65,7 @@ class Ejercicios_Tema(models.Model):
 class Formula(models.Model):
     formula=models.TextField(max_length=500)
     def __str__(self):
-        return formula
+        return self.formula
 
 class Formulas_Tema(models.Model):
     formula=models.ForeignKey(Formula)
