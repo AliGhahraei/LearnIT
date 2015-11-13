@@ -4,3 +4,5 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def index(request):
     return render(request, 'principal/index.html')
+def menu(request):
+    return render(request, 'principal/menu.html')

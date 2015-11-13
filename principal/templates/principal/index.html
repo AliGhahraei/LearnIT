@@ -7,59 +7,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
-        <script src="{% static 'CodigoJQuery.js '%}"></script> 
 
         <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
         <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
 
         <link rel="stylesheet" href="{% static 'estilo.css' %}">   
+
+        <script>
+            $(document).ready(function(){
+                $("#menu").load("/menu");
+            });
+        </script>
     </head>
     <body>
 	<div>
     <!--mainPage-->
     <div data-role="page" id="mainPage">
-
-        <!--panelUsuario-->
-        <div data-role="panel" id="panelUsuario" data-display="overlay">
-            <ul data-role="listview">
-                </li>
-                <li data-role="collapsible" data-iconpos="right" data-inset="false">
-                    <h2>Curso 1</h2>
-                    <ul data-role="listview">
-                        <li><a href="menuProyecto.html" data-ajax="false">Proyecto 1</a></li>
-                        <li><a href="nuevoProyecto.html" data-ajax="false">Nuevo Proyecto</a></li>
-                    </ul>
-                </li>
-                <li data-role="collapsible" data-iconpos="right" data-inset="false">
-                    <h2>Curso 2</h2>
-                    <ul data-role="listview">
-                        <li><a href="nuevoProyecto.html" data-ajax="false">Nuevo Proyecto</a></li>
-                    </ul>
-                </li>
-                <li data-icon="delete"><a href="/login/logout" data-ajax="false">Salir</a></li>
-            </ul> <!--listview-->
-        </div> <!--Panel-->
-
-        <div data-role="header">
-            <h1>LearnIT</h1>
-            <a href="#panelUsuario" data-icon="bullets">Opciones</a>
-        </div><!-- /header -->
+        <div id="menu"></div>
 
         <div role="main" class="ui-content">
             <div class="ui-grid-b">
                 <div class="ui-block-a"></div>
                 <div class="ui-block-b">
                     <h1>LearnIT - Inicio</h1>
-                    <form>
-                        <input type="submit" value="No hacer nada">
-                    </form>
+                    <button type="button">Ver Carreras</button>
+                    <button type="button">Ver Materias</button>
+                    <button type="button">Crear Materia</button>
+                    <button type="button" onclick="location.href='/temas/crearTema'">Crear Tema</button>
                 </div>
                 <div class="ui-block-c"></div>
             </div>
         </div>
-
     </div> <!--/mainPage-->
-            
         </div>
     </body>
 </html>
