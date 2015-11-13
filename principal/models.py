@@ -60,10 +60,3 @@ class Formula(models.Model):
 class Formulas_Tema(models.Model):
     formula=models.ForeignKey(Formula)
     tema=models.ForeignKey(Tema)
-
-"""
-    
-
-    titulo=models.CharField(max_length=50)
-    califReview=models.FloatField()
-"""
