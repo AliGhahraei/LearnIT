@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-	<title>Welcome!</title>
+	<title>Create Topic</title>
         <meta charset="utf-8">
         {% load staticfiles %}
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,11 +17,64 @@
 	<div>
     <!--mainPage-->
     <div data-role="page" id="mainPage">
+        <div data-role="header">
+            <h1>LearnIT - Create Topic</h1>
+        </div>
         <div role="main" class="ui-content">
             <div class="ui-grid-b">
                 <div class="ui-block-a"></div>
                 <div class="ui-block-b">
-                    <h1>LearnIT - Crear Tema</h1>
+                    <h1>LearnIT - Create Topic</h1>
+		    <form action="/temas/crearTema" method="post">
+			{% csrf_token %}
+
+			{% if error %}
+			    <span class="error">{{ error }}</span>    
+			{% endif %}
+
+			{{ formTema.non_field_errors }}
+
+			<p><span class=error>*</span> Required field</p>
+                        
+                        <span class=error>*</span> Subject
+                        <select name="selectorMateria" required>
+                            {% for materia in materias %}
+                            <option value="{{ materia }}">{{ materia }}</option>
+                            {% endfor %}
+                        </select>
+
+                        {% for campo in formTema %}
+			    {{ campo.label_tag }}
+			    {{ campo.errors }} 
+			    {{ campo }}
+                        {% endfor %}
+
+                        {{ conjuntoFormulas.management_form }}
+                        {% for forma in conjuntoFormulas %}
+                            <h3>Formula {{ forloop.counter }}</h3>
+                            {% for campo in forma %}
+			        {{ campo.label_tag }}
+			        {{ campo.errors }} 
+			        {{ campo }}
+                            {% endfor %}
+                        {% endfor %}
+
+                        <input type="submit" name="anadirFormula" value="Add another formula"/>
+
+                        {{ conjuntoEjercicios.management_form }}
+                        {% for forma in conjuntoEjercicios %}
+                            <h3>Exercise {{ forloop.counter }}</h3>
+                            {% for campo in forma %}
+			        {{ campo.label_tag }}
+			        {{ campo.errors }} 
+			        {{ campo }}
+                            {% endfor %}
+                        {% endfor %}
+
+                        <input type="submit" name="anadirEjercicio" value="Add another exercise"/>
+                        
+			<input type="submit" name="submit" value="Submit" />
+	            </form>
                 </div>
                 <div class="ui-block-c"></div>
             </div>
