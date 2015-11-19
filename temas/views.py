@@ -40,8 +40,8 @@ class FormaEjercicios(ModelForm):
         model=Ejercicio
         fields=['problema','solucion']
         labels = {
-            'problema': 'Problem',
-            'solucion': 'Solution',
+            'problema': requerido('Problem'),
+            'solucion': requerido('Solution'),
         }
     def __init__(self, *args, **kwargs):
         super(FormaEjercicios, self).__init__(*args, **kwargs)
@@ -53,7 +53,7 @@ class FormaFormulas(ModelForm):
         model=Formula
         fields=['formula']
         labels = {
-            'formula': 'Formula',
+            'formula': requerido('Formula'),
         }
 
 @login_required
