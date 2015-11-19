@@ -59,7 +59,7 @@ class FormaFormulas(ModelForm):
 @login_required
 def crearTema(request):
     FabricaEjercicios = formset_factory(FormaEjercicios, formset=FormSetRequerido)
-    FabricaFormulas = formset_factory(FormaFormulas)
+    FabricaFormulas = formset_factory(FormaFormulas, extra=0, formset=FormSetRequerido)
         
     if request.method == 'POST':
         if 'anadirEjercicio' in request.POST:
