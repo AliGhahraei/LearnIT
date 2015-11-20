@@ -14,17 +14,48 @@ class UserAdmin(admin.ModelAdmin):
         UsuarioInline,
     ]
 
-# Register your models here.
+class FormulaTemaInline(admin.StackedInline):
+    extra=0
+    model=Formulas_Tema
+    verbose_name_plural = 'Formulas'
+
+class EjercicioTemaInline(admin.StackedInline):
+    extra=0
+    model=Ejercicios_Tema
+    verbose_name_plural = 'Ejercicios'
+
+class TemaAdmin(admin.ModelAdmin):
+    inlines=[
+        FormulaTemaInline,
+        EjercicioTemaInline,
+    ]
+
+class MateriaCarreraInline(admin.StackedInline):
+    extra=0
+    model=Materias_Carrera
+    verbose_name_plural = 'Materias'
+
+class CarreraAdmin(admin.ModelAdmin):
+    inlines=[
+        MateriaCarreraInline,
+    ]
+
+class TemaMateriaInline(admin.StackedInline):
+    extra=0
+    model=Temas_Materia
+    verbose_name_plural = 'Temas'
+
+class MateriaAdmin(admin.ModelAdmin):
+    inlines=[
+        TemaMateriaInline,
+    ]
+
 admin.site.unregister(User)
+
 admin.site.register(User,UserAdmin)
+admin.site.register(Carrera,CarreraAdmin)
+admin.site.register(Materia, MateriaAdmin)
+admin.site.register(Tema, TemaAdmin)
 
-admin.site.register(Carrera)
-admin.site.register(Materia)
-admin.site.register(Materias_Carrera)
-admin.site.register(Tema)
-admin.site.register(Temas_Materia)
 admin.site.register(Ejercicio)
-admin.site.register(Ejercicios_Tema)
 admin.site.register(Formula)
-admin.site.register(Formulas_Tema)
-

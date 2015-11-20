@@ -39,8 +39,8 @@ class Materias_Carrera(models.Model):
 
 class Tema(models.Model):
     tema=models.CharField(max_length=50)
-    resumenTeorico=models.TextField(max_length=5000)
-    referencias=models.TextField(max_length=2000)
+    resumenTeorico=models.TextField(max_length=5000, blank=True, null=True)
+    referencias=models.TextField(max_length=2000, blank=True, null=True)
     def __str__(self):
         return self.tema
     
