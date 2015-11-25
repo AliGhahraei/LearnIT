@@ -18,13 +18,14 @@
     <!--mainPage-->
     <div data-role="page" id="mainPage">
         <div data-role="header">
+            <a href="../.." data-icon="back" data-ajax="false">Regresar</a>
             <h1>LearnIT - Create Topic</h1>
         </div>
         <div role="main" class="ui-content">
             <div class="ui-grid-b">
                 <div class="ui-block-a"></div>
                 <div class="ui-block-b">
-                    <h1>LearnIT - Create Topic</h1>
+                    <center><h1>LearnIT - Create Topic</h1></center>
 		    <form action="/temas/crearTema" method="post">
 			{% csrf_token %}
 

@@ -41,6 +41,8 @@ INSTALLED_APPS = (
     'principal',
     'registro',
     'temas',
+    'materia',
+    'carrera',
 )
 
 MIDDLEWARE_CLASSES = (

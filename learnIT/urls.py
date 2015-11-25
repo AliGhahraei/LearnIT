@@ -21,5 +21,7 @@ urlpatterns = [
     url(r'^registro/', include('registro.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^temas/', include('temas.urls')),
+    url(r'^carrera/', include('carrera.urls')),
+    url(r'^materia/', include('materia.urls')),
     url(r'^', include('principal.urls')),
 ]

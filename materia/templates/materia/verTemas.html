@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>LearnIT-Materias</title>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
+
+    <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+    <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">   
+</head>
+
+<body>
+	<div>
+        <!--mainPage-->
+        <div data-role="page" id="mainPage">
+
+            <div data-role="header">
+                <a href="#panelUsuario" data-icon="bullets">Opciones</a>
+                <h1>LearnIT</h1>
+            </div><!-- /header -->
+
+            <div role="main" class="ui-content">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b">
+                    
+                    </div>
+                    <div class="ui-block-c"></div>
+                </div>
+            </div>
+
+        </div> <!--/mainPage-->
+
+    </div>
+</body>
+</html>
