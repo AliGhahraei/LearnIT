@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.utils.safestring import mark_safe
 from django.forms.formsets import BaseFormSet
+import ast
 
 from django.forms.models import ModelForm
 from django.forms import formset_factory
@@ -55,6 +56,151 @@ class FormaFormulas(ModelForm):
         labels = {
             'formula': requerido('Formula'),
         }
+
+@login_required
+def editarTema(request, idTema):
+    FabricaEjercicios = formset_factory(FormaEjercicios, extra=0, formset=FormSetRequerido)
+    FabricaFormulas = formset_factory(FormaFormulas, extra=0, formset=FormSetRequerido)
+        
+    if request.method == 'POST':
+        if 'anadirEjercicio' in request.POST:
+            copiaPost = request.POST.copy()
+            copiaPost['ejercicios-TOTAL_FORMS'] = int(copiaPost['ejercicios-TOTAL_FORMS'])+1
+            formTema = FormaTema(request.POST, prefix='tema')
+            conjuntoEjercicios = FabricaEjercicios(copiaPost, prefix='ejercicios')
+            conjuntoFormulas = FabricaFormulas(request.POST, prefix='formulas')
+            
+            carreraUsuario = request.user.usuario.carrera
+            relMateriasCarrera = Materias_Carrera.objects.filter(carrera=carreraUsuario)
+            materias = []
+            for relacion in relMateriasCarrera:
+                materias.append(Materia.objects.get(materia=relacion.materia))
+            noErrores = True
+
+            return render(request, 'temas/editarTema.html', {
+                'formTema': formTema, 
+                'conjuntoEjercicios': conjuntoEjercicios,
+                'conjuntoFormulas': conjuntoFormulas,
+                'materias': materias,
+                'noErrores': noErrores,
+                'idTema': idTema,  
+                'idEjercicios': request.POST['idEjercicios'],
+                'idFormulas': request.POST['idFormulas'],
+            })
+
+        elif 'anadirFormula' in request.POST:
+            copiaPost = request.POST.copy()
+            copiaPost['formulas-TOTAL_FORMS'] = int(copiaPost['formulas-TOTAL_FORMS'])+1
+            formTema = FormaTema(request.POST, prefix='tema')
+            conjuntoEjercicios = FabricaEjercicios(request.POST, prefix='ejercicios')
+            conjuntoFormulas = FabricaFormulas(copiaPost, prefix='formulas')
+            
+            carreraUsuario = request.user.usuario.carrera
+            relMateriasCarrera = Materias_Carrera.objects.filter(carrera=carreraUsuario)
+            materias = []
+            for relacion in relMateriasCarrera:
+                materias.append(Materia.objects.get(materia=relacion.materia))
+            noErrores = True
+
+            return render(request, 'temas/editarTema.html', {
+                'formTema': formTema, 
+                'conjuntoEjercicios': conjuntoEjercicios,
+                'conjuntoFormulas': conjuntoFormulas,
+                'materias': materias,
+                'noErrores': noErrores,
+                'idTema': idTema, 
+                'idEjercicios': request.POST['idEjercicios'],
+                'idFormulas': request.POST['idFormulas'],
+            })
+
+        elif 'submit' in request.POST:
+            formTema = FormaTema(request.POST, prefix='tema')
+            conjuntoEjercicios = FabricaEjercicios(request.POST, prefix='ejercicios')
+            conjuntoFormulas = FabricaFormulas(request.POST, prefix='formulas')
+            
+
+            if formTema.is_valid() and conjuntoEjercicios.is_valid() and conjuntoFormulas.is_valid():
+                idEjercicios=ast.literal_eval(request.POST['idEjercicios'])
+                idFormulas=ast.literal_eval(request.POST['idFormulas'])
+                
+                tema = Tema.objects.get(id=idTema)
+                tema.tema=formTema.cleaned_data['tema']
+                tema.resumenTeorico=formTema.cleaned_data['resumenTeorico']
+                tema.resumenTeorico=formTema.cleaned_data['referencias']
+                tema.save()
+
+                for i in range(0, len(idEjercicios)):
+                    ejercicio=Ejercicio.objects.get(id=idEjercicios[i])
+                    ejercicio.problema=conjuntoEjercicios[i].cleaned_data['problema']
+                    ejercicio.solucion=conjuntoEjercicios[i].cleaned_data['solucion']
+                    ejercicio.save()
+
+                for i in range(0, len(idFormulas)):
+                    formula=Formula.objects.get(id=idFormulas[i])
+                    formula.formula=conjuntoEjercicios[i].cleaned_data['formula']
+                    formula.save()
+
+                for i in range (len(idEjercicios), len(conjuntoEjercicios)):
+                    ejercicio = conjuntoEjercicios[i].save()
+                    relEjerciciosTema = Ejercicios_Tema()
+                    relEjerciciosTema.ejercicio=ejercicio
+                    relEjerciciosTema.tema=tema
+                    relEjerciciosTema.save()
+
+                for i in range (len(idFormulas), len(conjuntoFormulas)):
+                    formula = conjuntoFormulas[i].save()
+                    relFormulasTema = Formulas_Tema()
+                    relFormulasTema.tema = tema
+                    relFormulasTema.formula = formula
+                    relFormulasTema.save()
+
+                return HttpResponseRedirect(paginaPrincipal)
+            else:
+                carreraUsuario = request.user.usuario.carrera
+                relMateriasCarrera = Materias_Carrera.objects.filter(carrera=carreraUsuario)
+                materias = []
+                for relacion in relMateriasCarrera:
+                    materias.append(Materia.objects.get(materia=relacion.materia))
+                idEjercicios=request.POST['idEjercicios']
+                idFormulas=request.POST['idFormulas']
+                
+    else:
+        temaActual=Tema.objects.get(id=idTema)
+
+        formulas = []
+        idFormulas = []
+        relFormulasTema = Formulas_Tema.objects.filter(tema=temaActual)
+        for relacion in relFormulasTema:
+            formulas.append(relacion.formula.__dict__)
+            idFormulas.append(relacion.formula.id)
+
+        ejercicios = []
+        idEjercicios = []
+        relEjerciciosTema = Ejercicios_Tema.objects.filter(tema=temaActual)
+        for relacion in relEjerciciosTema:
+            ejercicios.append(relacion.ejercicio.__dict__)
+            idEjercicios.append(relacion.ejercicio.id)
+
+        conjuntoEjercicios = FabricaEjercicios(prefix='ejercicios', initial=ejercicios)
+        conjuntoFormulas = FabricaFormulas(prefix='formulas', initial=formulas)
+
+        carreraUsuario = request.user.usuario.carrera
+        relMateriasCarrera = Materias_Carrera.objects.filter(carrera=carreraUsuario)
+        materias = []
+        for relacion in relMateriasCarrera:
+            materias.append(Materia.objects.get(materia=relacion.materia))
+        
+        formTema = FormaTema(initial=temaActual.__dict__, prefix='tema')
+
+    return render(request, 'temas/editarTema.html', {
+        'formTema': formTema, 
+        'conjuntoEjercicios': conjuntoEjercicios,
+        'conjuntoFormulas': conjuntoFormulas,
+        'materias': materias,
+        'idTema': idTema,
+        'idEjercicios': idEjercicios,
+        'idFormulas': idFormulas,
+    })
 
 @login_required
 def crearTema(request):
