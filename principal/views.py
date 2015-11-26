@@ -15,7 +15,7 @@ def index(request):
     lista_materias = []
     for relacion in matsCarrera:
         lista_materias.append(Materia.objects.get(materia=relacion.materia))
-        
+
     return render( request, 'principal/index.html', {
     	'usuario' : miUsername,
     	'nombres' : miNombre,

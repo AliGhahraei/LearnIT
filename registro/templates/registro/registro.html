@@ -1,54 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    {% load staticfiles %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sign Up</title>
+	<meta charset="utf-8">
+	{% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="{% static 'jquery-2.1.1.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
-    <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+	<script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
 
-    <link rel="stylesheet" href="{% static 'estilo.css' %}">
+	<link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+	<script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+
+	<link rel="stylesheet" href="{% static 'estilo.css' %}">   
 </head>
 <body>
-    <div data-role="page">
-	<div data-role="header">
-	    <h1>LearnIT - Sign Up</h1>
+	<div>
+		<div data-role="page">
+			<div data-role="header">
+				<h1>LearnIT - Sign Up</h1>
+			</div>
+			<div role="main" class="ui-content">
+				<div class="ui-grid-b">
+					<div class="ui-block-a"></div>
+					<div class="ui-block-b">
+						<div>
+							<form action="/registro/" method="post">
+								{% csrf_token %}
+
+								{% if error %}
+									<span class="error">{{ error }}</span>    
+								{% endif %}
+
+								{{ formPerfil.non_field_errors }}
+								{{ formUsuario.non_field_errors }}
+
+								<p><span class=error>*</span> Required field</p>
+
+								{% for campo in formUsuario %}
+									{{ campo.label_tag }}
+									{{ campo.errors }} 
+									{{ campo }}
+								{% endfor %}
+
+								{% for campo in formPerfil %}
+									{{ campo.label_tag }}
+									{{ campo.errors }} 
+									{{ campo }}
+								{% endfor %}
+
+								<input type="submit" value="Submit" />
+							</form>
+						</div>
+						<div><p>Already have an account? Log in <a href="/login/">here</a></p></div>
+					</div>
+					<div class="ui-block-c"></div>
+				</div>
+			</div>
+		</div>
 	</div>
-        <div role="main" class="ui-content">
-            <div class="ui-grid-b">
-                <div class="ui-block-a"></div>
-                <div class="ui-block-b">
-		    <form action="/registro/" method="post">
-			{% csrf_token %}
-
-			{% if error %}
-			    <span class="error">{{ error }}</span>    
-			{% endif %}
-
-			{{ formPerfil.non_field_errors }}
-			{{ formUsuario.non_field_errors }}
-
-			<p><span class=error>*</span> Required field</p>
-
-                        {% for campo in formUsuario %}
-			    {{ campo.label_tag }}
-			    {{ campo.errors }} 
-			    {{ campo }}
-                        {% endfor %}
-
-			{% for campo in formPerfil %}
-                            {{ campo.label_tag }}
-			    {{ campo.errors }} 
-			    {{ campo }}
-			{% endfor %}
-
-			<input type="submit" value="Submit" />
-			</br>
-			</br>
-			Already have an account? Log in <a href="/login/">here</a>
-	            </form>
-                </div>
-                <div class=ui-block-c"></div>
-            </div>
-        </div>
-    </div>
 </body>
+</html>

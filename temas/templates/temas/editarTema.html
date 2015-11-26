@@ -1,99 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
+<head>
 	<title>Create Topic</title>
-        <meta charset="utf-8">
-        {% load staticfiles %}
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
+    <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
 
-        <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
-        <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+    <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
 
-        <link rel="stylesheet" href="{% static 'estilo.css' %}">   
-    </head>
-    <body>
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">   
+</head>
+<body>
 	<div>
-    <!--mainPage-->
-    <div data-role="page" id="mainPage">
-        <div data-role="header">
-            <a href="../../.." data-icon="back" data-ajax="false">Go back</a>
-            <h1>LearnIT - Create Topic</h1>
-        </div>
-        <div role="main" class="ui-content">
-            <div class="ui-grid-b">
-                <div class="ui-block-a"></div>
-                <div class="ui-block-b">
-                    <h1>LearnIT - Create Topic</h1>
-                    <form action="/temas/editarTema/{{ idTema }}/" method="post">
-			{% csrf_token %}
+        <!--mainPage-->
+        <div data-role="page" id="mainPage">
 
-                        <input type="hidden" name="idEjercicios" value="{{ idEjercicios }}"/>
-                        <input type="hidden" name="idFormulas" value="{{ idFormulas }}"/>
-
-			{% if error %}
-			    <span class="error">{{ error }}</span>    
-			{% endif %}
-
-			{{ formTema.non_field_errors }}
-
-			<p><span class=error>*</span> Required field</p>
-                        
-                        <span class=error>*</span> Subject
-                        <select name="selectorMateria" required>
-                            {% for materia in materias %}
-                            <option value="{{ materia }}">{{ materia }}</option>
-                            {% endfor %}
-                        </select>
-                        
-                        <h2 class="centrado">Topic</h2>
-                        {% for campo in formTema %}
-			    {{ campo.label_tag }}
-                            {% if noErrores == None %}
-			    {{ campo.errors }} 
-                            {% endif %}
-			    {{ campo }}
-                        {% endfor %}
-
-                        <h2 class="centrado">Formulas</h2>
-                        {{ conjuntoFormulas.management_form }}
-                        {% for forma in conjuntoFormulas %}
-                            <h3>Formula {{ forloop.counter }}</h3>
-                            {% for campo in forma %}
-			        {{ campo.label_tag }}
-                                {% if noErrores == None %}
-			        {{ campo.errors }} 
-                                {% endif %}
-			        {{ campo }}
-                            {% endfor %}
-                        {% endfor %}
-
-                        <input type="submit" name="anadirFormula" value="Add formula"/>
-
-                        <h2 class="centrado">Exercises (At least 1)</h2>
-                        {{ conjuntoEjercicios.management_form }}
-                        {% for forma in conjuntoEjercicios %}
-                            <h3>Exercise {{ forloop.counter }}</h3>
-                            {% for campo in forma %}
-			        {{ campo.label_tag }}
-                                {% if noErrores == None %}
-			        {{ campo.errors }} 
-                                {% endif %}
-			        {{ campo }}
-                            {% endfor %}
-                        {% endfor %}
-
-                        <input type="submit" name="anadirEjercicio" value="Add exercise"/>
-                        
-			<input type="submit" name="submit" value="Submit" />
-	            </form>
-                </div>
-                <div class="ui-block-c"></div>
+            <div data-role="header">
+                <a href="../../.." data-icon="back" data-ajax="false">Go back</a>
+                <h1>LearnIT - Create Topic</h1>
             </div>
-        </div>
-    </div> <!--/mainPage-->
             
-        </div>
-    </body>
+            <div role="main" class="ui-content">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b">
+                        <div><h1>LearnIT - Create Topic</h1></div>
+                        <div>
+                            <form action="/temas/editarTema/{{ idTema }}/" method="post">
+
+                                {% csrf_token %}
+
+                                <input type="hidden" name="idEjercicios" value="{{ idEjercicios }}"/>
+                                <input type="hidden" name="idFormulas" value="{{ idFormulas }}"/>
+                                {% if error %}
+                                    <span class="error">{{ error }}</span>    
+                                {% endif %}
+
+                                {{ formTema.non_field_errors }}
+
+                                <p><span class=error>*</span> Required field</p>
+
+                                <span class=error>*</span> Subject
+                                <select name="selectorMateria" required>
+                                    {% for materia in materias %}
+                                        <option value="{{ materia }}">{{ materia }}</option>
+                                    {% endfor %}
+                                </select>
+                            
+                                <h2 class="centrado">Topic</h2>
+                                {% for campo in formTema %}
+                                    {{ campo.label_tag }}
+                                    {% if noErrores == None %}
+                                        {{ campo.errors }}
+                                    {% endif %}
+                                    {{ campo }}
+                                {% endfor %}
+
+                                <h2 class="centrado">Formulas</h2>
+                                {{ conjuntoFormulas.management_form }}
+                                {% for forma in conjuntoFormulas %}
+                                    <h3>Formula {{ forloop.counter }}</h3>
+                                    {% for campo in forma %}
+                                        {{ campo.label_tag }}
+                                        {% if noErrores == None %}
+                                            {{ campo.errors }} 
+                                        {% endif %}
+                                        {{ campo }}
+                                    {% endfor %}
+                                {% endfor %}
+                                <input type="submit" name="anadirFormula" value="Add formula"/>
+
+                                <h2 class="centrado">Exercises (At least 1)</h2>
+                                {{ conjuntoEjercicios.management_form }}
+                                {% for forma in conjuntoEjercicios %}
+                                    <h3>Exercise {{ forloop.counter }}</h3>
+                                    {% for campo in forma %}
+                                        {{ campo.label_tag }}
+                                        {% if noErrores == None %}
+                                            {{ campo.errors }} 
+                                        {% endif %}
+                                        {{ campo }}
+                                    {% endfor %}
+                                {% endfor %}
+                                <input type="submit" name="anadirEjercicio" value="Add exercise"/>
+                            
+                                <input type="submit" name="submit" value="Submit" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="ui-block-c"></div>
+                </div>
+            </div>
+        </div> <!--/mainPage-->
+    </div>
+</body>
 </html>

@@ -26,7 +26,7 @@
                         <p>{{ correo }}</p>
                         <p><b>{{ carrera }}</b></p>
                     </a></li>
-<!--                    <li><a href="carrera/verCarrera" data-ajax="false">Ir a cuenta</a></li> -->
+                    <!--                    <li><a href="carrera/verCarrera" data-ajax="false">Ir a cuenta</a></li> -->
                     <li data-icon="plus"><a href="/materia/crearMateria" data-ajax="false">New Subject</a></li>
                     <li data-icon="plus"><a href="/temas/crearTema" data-ajax="false">New Topic</a></li>
                     <li data-icon="power"><a href="/login/logout" data-ajax="false">Log Out</a></li>
@@ -48,7 +48,7 @@
                                 <li data-role="list-divider">Subjects in {{ carrera }}</li>
                                 {% if lista_materias %}
                                     {% for materia in lista_materias %}
-                                        <li data-icon="arrow-r"><a href="#">{{ materia }}</a></li>
+                                        <li data-icon="arrow-r"><a href="materia/verTemas/{{ materia.id }}">{{ materia }}</a></li>
                                     {% endfor %}
                                 {% else %}
                                     <li>There are no subjects related to your major.</li>

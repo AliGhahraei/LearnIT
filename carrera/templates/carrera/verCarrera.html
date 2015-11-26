@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
+<head>
 	<title>LearnIT-Carrera</title>
-        <meta charset="utf-8">
-        {% load staticfiles %}
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
+    <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
 
-        <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
-        <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+    <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
 
-        <link rel="stylesheet" href="{% static 'estilo.css' %}">   
-    </head>
-    <body>
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">   
+</head>
+<body>
 	<div>
-    <!--mainPage-->
-    <div data-role="page" id="mainPage">
+        <!--mainPage-->
+        <div data-role="page" id="mainPage">
 
-        <div data-role="header">
-            <a href="../.." data-icon="back" data-ajax="false">Go back</a>
-            <h1>LearnIT - My Profile</h1>
-        </div><!-- /header -->
+            <div data-role="header">
+                <a href="../.." data-icon="back" data-ajax="false">Go back</a>
+                <h1>LearnIT - My Profile</h1>
+            </div><!-- /header -->
 
-        <div role="main" class="ui-content">
-            <div class="ui-grid-b">
-                <div class="ui-block-a"></div>
-                <div class="ui-block-b">
-                    <div>
-                        <ul data-role="listview" data-inset="true" data-divider-theme="a">
-                        <li data-role="list-divider">Perfil</li>
-                        <li>Username: {{ usuario }}</li>
-                        <li>First Name: {{ nombres }}</li>
-                        <li>Last Name: {{ apellidos }}</li>
-                        <li data-role="list-divider">Major</li>
-                        <li>
-                            {{ carrera }}<br>
-                            <p>¿Didn't like the major? You can change it <a href="#">here</a></p>
-                        </li>
-                        </ul>
+            <div role="main" class="ui-content">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b">
+                        <div>
+                            <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                                <li data-role="list-divider">Perfil</li>
+                                <li>Username: {{ usuario }}</li>
+                                <li>First Name: {{ nombres }}</li>
+                                <li>Last Name: {{ apellidos }}</li>
+                                <li data-role="list-divider">Major</li>
+                                <li>
+                                    {{ carrera }}<br>
+                                    <p>¿Didn't like the major? You can change it <a href="#">here</a></p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    <div class="ui-block-c"></div>
                 </div>
-                <div class="ui-block-c"></div>
             </div>
-        </div>
 
-    </div> <!--/mainPage-->
-            
-        </div>
-    </body>
+        </div> <!--/mainPage-->
+        
+    </div>
+</body>
 </html>
