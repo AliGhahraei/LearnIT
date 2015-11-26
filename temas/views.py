@@ -315,3 +315,37 @@ def crearTema(request):
         'conjuntoFormulas': conjuntoFormulas,
         'materias': materias,
     })
+    
+@login_required
+def verTema(request, idTema):
+
+	temaActual=Tema.objects.get(id=idTema)
+
+	carreraUsuario = request.user.usuario.carrera
+	relMateriasCarrera = Materias_Carrera.objects.filter(carrera=carreraUsuario)
+	materias= []
+
+	for relacion in relMateriasCarrera:
+		materias.append(Materia.objects.get(materia=relacion.materia))
+	formulas = []
+	idFormulas = []
+	relFormulasTema = Formulas_Tema.objects.filter(tema=temaActual)
+	for relacion in relFormulasTema:
+		formulas.append(relacion.formula.__dict__)
+		idFormulas.append(relacion.formula.id)
+	
+	ejercicios = []
+	idEjercicios = []
+	relEjerciciosTema = Ejercicios_Tema.objects.filter(tema=temaActual)
+	for relacion in relEjerciciosTema:
+		ejercicios.append(relacion.ejercicio.__dict__)
+		idEjercicios.append(relacion.ejercicio.id)
+
+	return render(request, 'temas/verTema.html',{
+    	'tema' : temaActual,
+    	'materias' : materias,
+    	'formulas' : formulas,
+    	'ejercicios' : ejercicios,
+    	'idTema': idTema,
+    	
+    })
