@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+	<title>Create Topic</title>
+        <meta charset="utf-8">
+        {% load staticfiles %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
+
+        <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+        <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+
+        <link rel="stylesheet" href="{% static 'estilo.css' %}">   
+    </head>
+    <body>
+	<div>
+    <!--mainPage-->
+    <div data-role="page" id="mainPage">
+        <div data-role="header">
+            <h1>LearnIT - Create Topic</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <div class="ui-grid-b">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+                    
+                    <form action="../../editarTema/{{ idTema }}/">
+			{% csrf_token %}
+
+                        <input type="hidden" name="idEjercicios" value="{{ idEjercicios }}"/>
+                        <input type="hidden" name="idFormulas" value="{{ idFormulas }}"/>
+
+			{% if error %}
+			    <span class="error">{{ error }}</span>    
+			{% endif %}
+
+                       
+            {% for materia in materias %}
+            <h1 class="centrado" value="{{ materia }}">{{ materia }}</h1>
+            {% endfor %}
+            
+            <h2 class="centrado">Topic</h2>
+            <h3>Name</h3>
+            <p>{{tema}}</p>
+            <h3>Summary</h3>
+            <p>{{tema.resumenTeorico}}</p>
+            <h3>References and external links</h3> 
+            <p>{{tema.referencias}}</p>
+            
+             <h2 class="centrado">Formulas</h2>
+            {% for forma in formulas %}
+            <h3>Formula {{ forloop.counter }}</h3>
+            {% if noErrores == None %}
+            {{ forma.errors }} 
+                    {% endif %}
+                {{forma.formula}}
+            {% endfor %}
+
+            <h2 class="centrado">Exercises</h2>
+            {% for ejer in ejercicios %}
+            <h3>Exercise {{ forloop.counter }}</h3>
+            {% if noErrores == None %}
+            {{ ejer.errors }} 
+                    {% endif %}
+
+                <p>Problem:</p>
+                {{ejer.problema}}
+                <p>Solution:</p>
+                {{ejer.solucion}}
+            {% endfor %}
+               
+                       
+			<input type="submit" name="submit" value="Edit" />
+	            </form>
+                </div>
+                <div class="ui-block-c"></div>
+            </div>
+        </div>
+    </div> <!--/mainPage-->
+            
+        </div>
+    </body>
+</html>
