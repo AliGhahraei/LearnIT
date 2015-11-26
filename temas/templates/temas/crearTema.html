@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Create Topic</title>
     <meta charset="utf-8">
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,13 +18,12 @@
         <div data-role="page" id="mainPage">
             <div data-role="header">
                 <a href="../.." data-icon="back" data-ajax="false">Go back</a>
-                <h1>LearnIT - Create Topic</h1>
+                <h1>LearnIT - New Topic</h1>
             </div>
             <div role="main" class="ui-content">
                 <div class="ui-grid-b">
                     <div class="ui-block-a"></div>
                     <div class="ui-block-b">
-                        <div><center><h1>LearnIT - Create Topic</h1></center></div>
                         <div>
                             <form action="/temas/crearTema" method="post">
 
@@ -39,14 +37,15 @@
 
                                 <p><span class=error>*</span> Required field</p>
 
-                                <p><span class=error>*</span> Subject</p>
+                                <h2 class="centrado">Subject Data</h2>
+                                <p><span class=error>*</span> Related Subject</p>
                                 <select name="selectorMateria" required>
                                     {% for materia in materias %}
                                     <option value="{{ materia }}">{{ materia }}</option>
                                     {% endfor %}
                                 </select>
 
-                                <h2 class="centrado">Topic</h2>
+                                <h2 class="centrado">Topic Data</h2>
                                 {% for campo in formTema %}
                                     {{ campo.label_tag }}
                                     {% if noErrores == None %}
@@ -55,7 +54,7 @@
                                     {{ campo }}
                                 {% endfor %}
 
-                                <h2 class="centrado">Formulas</h2>
+                                <h2 class="centrado">Equation List</h2>
                                 {{ conjuntoFormulas.management_form }}
                                 {% for forma in conjuntoFormulas %}
                                     <h3>Formula {{ forloop.counter }}</h3>
@@ -69,7 +68,7 @@
                                 {% endfor %}
                                 <input type="submit" name="anadirFormula" value="Add formula"/>
 
-                                <h2 class="centrado">Exercises (At least 1)</h2>
+                                <h2 class="centrado">Exercise List(Required at least 1)</h2>
                                 {{ conjuntoEjercicios.management_form }}
                                 {% for forma in conjuntoEjercicios %}
                                     <h3>Exercise {{ forloop.counter }}</h3>

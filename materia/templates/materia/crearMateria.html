@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
+
+    <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+    <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">   
+</head>
+<body>
+    <div>
+        <!--mainPage-->
+        <div data-role="page" id="mainPage">
+            <div data-role="header">
+                <a href="../.." data-icon="back" data-ajax="false">Go back</a>
+                <h1>LearnIT - New Subject</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b">
+                        <div>
+                            <form action="/materia/crearMateria" method="post">
+                                {% csrf_token %}
+
+                                {% if error %}
+                                    <span class="error">{{ error }}</span>
+                                {% endif %}
+
+                                {{ formMateria.non_field_errors }}
+
+                                <p><span class=error>*</span> Required field</p>
+
+                                <h2 class="centrado">Subject Data</h2>
+                                {% for campo in formMateria %}
+                                    {{ campo.label_tag }}
+                                    {% if noErrores == None %}
+                                        {{ campo.errors }}
+                                    {% endif %}
+                                    {{ campo }}
+                                {% endfor %}
+
+                                <input type="submit" name="submit" value="Submit" onclick="console.log({{ campo }})" />
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="ui-block-c"></div>
+                </div>
+            </div>
+        </div> <!--/mainPage-->
+    </div>
+</body>
+</html>
