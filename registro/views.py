@@ -47,6 +47,7 @@ def registra(request):
                 usuario = User.objects.create_user(formUsuario.cleaned_data['username'],formUsuario.cleaned_data['email'],formUsuario.cleaned_data['password'])
                 usuario.first_name=formUsuario.cleaned_data['first_name']
                 usuario.last_name=formUsuario.cleaned_data['last_name']
+                usuario.save()
                 perfil = formPerfil.save(commit=False)
                 perfil.user = usuario
                 perfil.save()
