@@ -15,39 +15,42 @@
 </head>
 
 <body>
-    <!--loginPage-->
-    <div data-role="page" id="loginPage">
-        <div data-role="header">
-            <h1>LearnIT - Login</h1>
-        </div> <!--/header-->
-        <div role="main" class="ui-content">
-            <div class="ui-grid-b">
-                <div class="ui-block-a"></div>
-                <div class="ui-block-b">
-                    <form action="/login/" method="post">
-                        {% csrf_token %}
+    <div>
+        <div data-role="page">
+            <div data-role="header">
+                <h1>LearnIT - Login</h1>
+            </div> <!--/header-->
 
-                        {% if error %}
-                            <span class=error>{{ error }}</span>    
-                        {% endif %}
-                        
-                        {{ form.non_field_errors }}
+            <div role="main" class="ui-content">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b">
+                        <div>
+                            <form action="/login/" method="post">
+                                {% csrf_token %}
 
-                        {{ form.username.label_tag }}
-                        {{ form.username.errors }}
-                        {{ form.username }}
-                        {{ form.password.label_tag }}
-                        {{ form.password.errors }}
-                        {{ form.password }}
-                        
-                        <input type="submit" value="Submit" class="ui-btn ui-shadow ui-corner-all" id="logInBtn"/>
-                        </br>
-                        Don't have an account yet? Get one <a href="/registro/">here</a>
-                    </form>
-                </div>
-                <div class="ui-block-c"></div>
-            </div> <!--/grid-b-->
-        </div> <!--/content-->
-    </div> <!--/loginPage-->
+                                {% if error %}
+                                    <span class=error>{{ error }}</span>    
+                                {% endif %}
+
+                                {{ form.non_field_errors }}
+
+                                {{ form.username.label_tag }}
+                                {{ form.username.errors }}
+                                {{ form.username }}
+                                {{ form.password.label_tag }}
+                                {{ form.password.errors }}
+                                {{ form.password }}
+
+                                <input type="submit" value="Submit" class="ui-btn ui-shadow ui-corner-all" id="logInBtn"/>
+                            </form>
+                        </div>
+                        <div><p>Don't have an account yet? Get one <a href="/registro/">here</a></p></div>
+                    </div>
+                    <div class="ui-block-c"></div>
+                </div> <!--/grid-b-->
+            </div> <!--/content-->
+        </div> <!--/page-->
+    </div>
 </body>
 </html>
