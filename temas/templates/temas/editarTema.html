@@ -41,6 +41,7 @@
 
                                 <p><span class=error>*</span> Required field</p>
 
+                                <h2 class="centrado">Related Subject</h2>
                                 <span class=error>*</span> Subject
                                 <select name="selectorMateria" required>
                                     {% for materia in materias %}
@@ -48,7 +49,7 @@
                                     {% endfor %}
                                 </select>
                             
-                                <h2 class="centrado">Topic</h2>
+                                <h2 class="centrado">Topic Data</h2>
                                 {% for campo in formTema %}
                                     {{ campo.label_tag }}
                                     {% if noErrores == None %}
@@ -57,7 +58,7 @@
                                     {{ campo }}
                                 {% endfor %}
 
-                                <h2 class="centrado">Formulas</h2>
+                                <h2 class="centrado">Equation List</h2>
                                 {{ conjuntoFormulas.management_form }}
                                 {% for forma in conjuntoFormulas %}
                                     <h3>Formula {{ forloop.counter }}</h3>
@@ -71,7 +72,7 @@
                                 {% endfor %}
                                 <input type="submit" name="anadirFormula" value="Add formula"/>
 
-                                <h2 class="centrado">Exercises (At least 1)</h2>
+                                <h2 class="centrado">Exercise List(Required at least 1)</h2>
                                 {{ conjuntoEjercicios.management_form }}
                                 {% for forma in conjuntoEjercicios %}
                                     <h3>Exercise {{ forloop.counter }}</h3>
