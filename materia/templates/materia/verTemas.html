@@ -20,27 +20,27 @@
         <div data-role="page" id="mainPage">
 
             <div data-role="header">
-                <a href="#panelUsuario" data-icon="bullets">Opciones</a>
+                <a href="../../.." data-icon="back" data-ajax="false">Go back</a>
                 <h1>LearnIT</h1>
             </div><!-- /header -->
             <div role="main" class="ui-content">
                 <div class="ui-grid-b">
                     <div class="ui-block-a"></div>
                     <div class="ui-block-b">
-                    {% csrf_token %}
-                    <div>
+                        {% csrf_token %}
+                        <div>
                             <ul data-role="listview" data-inset="true" data-divider-theme="a">
                                 <li data-role="list-divider">Topics in {{ nMateria }}</li>
                                 {% if listTemas %}
                                     {% for tema in listTemas %}
-                                        <li data-icon="arrow-r"><a href="../../../temas/verTema/{{ tema.tema.id }}">{{ tema.tema }}</a></li>
+                                        <li data-icon="arrow-r"><a href="../../../temas/verTema/{{ tema.tema.id }}/">{{ tema.tema }}</a></li>
                                     {% endfor %}
                                 {% else %}
-                                    <li>There are no topics related to your major.</li>
+                                    <li>There are no topics related to your subject.</li>
                                 {% endif %}
                             </ul>
                         </div>
-            
+                        <div><p>You can add topics with the options panel.</p></div>
                     </div>
                     <div class="ui-block-c"></div>
                 </div>

@@ -48,16 +48,14 @@
                                 <li data-role="list-divider">Subjects in {{ carrera }}</li>
                                 {% if lista_materias %}
                                     {% for materia in lista_materias %}
-                                        <li data-icon="arrow-r"><a href="materia/verTemas/{{ materia.id }}">{{ materia }}</a></li>
+                                        <li data-icon="arrow-r"><a href="materia/verTemas/{{ materia.id }}/">{{ materia }}</a></li>
                                     {% endfor %}
                                 {% else %}
                                     <li>There are no subjects related to your major.</li>
                                 {% endif %}
                             </ul>
                         </div>
-                        <div>
-                            <p>You can add subjects with the options panel.</p>
-                        </div>
+                        <div><p>You can add subjects with the options panel.</p></div>
                     </div>
                     <div class="ui-block-c"></div>
                 </div>
