@@ -9,8 +9,6 @@ from django.forms.models import ModelForm
 from principal.models import Materia, Carrera, Materias_Carrera,Temas_Materia, Tema, Usuario
 from django.contrib.auth.models import User
 
-paginaPrincipal='/'
-
 def requerido(stringOriginal):
 	return mark_safe(('<span class=error>*</span> '+stringOriginal))
 
@@ -21,14 +19,12 @@ class FormSetRequerido(BaseFormSet):
 			form.empty_permitted = False
 
 class FormaMateria(ModelForm):
-
 	class Meta:
 		model=Materia
 		fields=['materia']
 		labels = {
-			'materia': requerido('Name')
+			'materia': requerido('Subject Name:')
 		}
-
 	def __init__(self, *args, **kwargs):
 		super(FormaMateria, self).__init__(*args, **kwargs)
 		self.fields['materia'].requred = True
@@ -39,24 +35,27 @@ def verTemas(request, idMateria):
 	nombreMateria = miMateria[0]
 	listTemas = Temas_Materia.objects.filter(materia=miMateria)
 	return render(request, 'materia/verTemas.html',{
-	'listTemas': listTemas,
-	'materia' : miMateria,
-	'nMateria' : nombreMateria,
-	})
+		'listTemas': listTemas,
+		'materia' : miMateria,
+		'nMateria' : nombreMateria,
+		})
 
 @login_required
-def crearMateria(request):        
-    if request.method == 'POST':
-        if 'submit' in request.POST:
-            formMateria = FormaMateria(request.POST, prefix='materia')
+def crearMateria(request):
+	if request.method == 'POST':
+		formMateria = FormaMateria(request.POST, prefix='materia')
 
-            if formMateria.is_valid():
-                materia = formMateria.save()
+		if formMateria.is_valid():
+			materia = formMateria.save()
+			relMateriasCarrera = Materias_Carrera()
+			relMateriasCarrera.carrera=carrera
+			relMateriasCarrera.materia=materia
+			relMateriasCarrera.save()
+			return HttpResponseRedirect('/')
 
-                return HttpResponseRedirect(paginaPrincipal)               
-    else:
-        formMateria = FormaMateria(prefix='materia')
+	else:
+		formMateria = FormaMateria(prefix='materia')
 
-    return render(request, 'materia/crearMateria.html', {
-        'formMateria': formMateria,
-    })
+	return render(request, 'materia/crearMateria.html', {
+		'formMateria': formMateria,
+		})
