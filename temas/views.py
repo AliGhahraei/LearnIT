@@ -126,7 +126,7 @@ def editarTema(request, idTema):
                 tema = Tema.objects.get(id=idTema)
                 tema.tema=formTema.cleaned_data['tema']
                 tema.resumenTeorico=formTema.cleaned_data['resumenTeorico']
-                tema.resumenTeorico=formTema.cleaned_data['referencias']
+                tema.referencias=formTema.cleaned_data['referencias']
                 tema.save()
 
                 for i in range(0, len(idEjercicios)):
@@ -135,11 +135,16 @@ def editarTema(request, idTema):
                     ejercicio.solucion=conjuntoEjercicios[i].cleaned_data['solucion']
                     ejercicio.save()
 
+                print("5.1\n")
                 for i in range(0, len(idFormulas)):
+                    print("5.1.1\n")
                     formula=Formula.objects.get(id=idFormulas[i])
-                    formula.formula=conjuntoEjercicios[i].cleaned_data['formula']
+                    print("5.1.2\n")
+                    formula.formula=conjuntoFormulas[i].cleaned_data['formula']
+                    print("5.1.3\n")
                     formula.save()
 
+                print("5.2\n")
                 for i in range (len(idEjercicios), len(conjuntoEjercicios)):
                     ejercicio = conjuntoEjercicios[i].save()
                     relEjerciciosTema = Ejercicios_Tema()
@@ -147,6 +152,7 @@ def editarTema(request, idTema):
                     relEjerciciosTema.tema=tema
                     relEjerciciosTema.save()
 
+                print("5.3\n")
                 for i in range (len(idFormulas), len(conjuntoFormulas)):
                     formula = conjuntoFormulas[i].save()
                     relFormulasTema = Formulas_Tema()
@@ -154,8 +160,11 @@ def editarTema(request, idTema):
                     relFormulasTema.formula = formula
                     relFormulasTema.save()
 
+                print("6\n")
+
                 return HttpResponseRedirect(paginaPrincipal)
             else:
+                print("7\n")
                 carreraUsuario = request.user.usuario.carrera
                 relMateriasCarrera = Materias_Carrera.objects.filter(carrera=carreraUsuario)
                 materias = []
@@ -192,6 +201,7 @@ def editarTema(request, idTema):
         
         formTema = FormaTema(initial=temaActual.__dict__, prefix='tema')
 
+    print("8\n")
     return render(request, 'temas/editarTema.html', {
         'formTema': formTema, 
         'conjuntoEjercicios': conjuntoEjercicios,

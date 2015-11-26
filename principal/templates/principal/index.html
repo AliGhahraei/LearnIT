@@ -1,73 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
+<head>
 	<title>Welcome!</title>
-        <meta charset="utf-8">
-        {% load staticfiles %}
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
+    <script src="{% static 'jquery-2.1.1.min.js' %}"></script> 
 
-        <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
-        <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.css' %}">
+    <script src="{% static 'jqueryMobile/jquery.mobile-1.4.5.min.js' %}"></script>
 
-        <link rel="stylesheet" href="{% static 'estilo.css' %}">   
-    </head>
-    <body>
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">   
+</head>
+<body>
 	<div>
-    <!--mainPage-->
-    <div data-role="page" id="mainPage">
+        <!--mainPage-->
+        <div data-role="page" id="mainPage">
 
-        <!--panelUsuario-->
-        <div data-role="panel" id="panelUsuario" data-display="overlay">
-            <ul data-role="listview">
-                </li>
-                <li data-icon="arrow-r" data-role="collapsible" data-iconpos="right" data-inset="false">
-                    <h2>Curso 1</h2>
-                    <ul data-role="listview">
-                        <li><a href="menuProyecto.html" data-ajax="false">Proyecto 1</a></li>
-                        <li><a href="nuevoProyecto.html" data-ajax="false">Nuevo Proyecto</a></li>
-                    </ul>
-                </li>
-                <li data-role="collapsible" data-iconpos="right" data-inset="false">
-                    <h2>Curso 2</h2>
-                    <ul data-role="listview">
-                        <li><a href="nuevoProyecto.html" data-ajax="false">Nuevo Proyecto</a></li>
-                    </ul>
-                </li>
-                <li data-icon="delete"><a href="/login/logout" data-ajax="false">Salir</a></li>
-            </ul> <!--listview-->
-        </div> <!--Panel-->
+            <!--panelLateral-->
+            <div data-role="panel" id="panelUsuario" data-display="overlay">
+                <ul data-role="listview">
+                    <li data-icon="user"><a href="/carrera/verCarrera" data-ajax="false">
+                        <h2>{{ nombres }} {{ apellidos }}</h2>
+                        <p>{{ correo }}</p>
+                        <p><b>{{ carrera }}</b></p>
+                    </a></li>
+<!--                    <li><a href="carrera/verCarrera" data-ajax="false">Ir a cuenta</a></li> -->
+                    <li data-icon="plus"><a href="/materia/crearMateria" data-ajax="false">New Subject</a></li>
+                    <li data-icon="plus"><a href="/temas/crearTema" data-ajax="false">New Topic</a></li>
+                    <li data-icon="power"><a href="/login/logout" data-ajax="false">Log Out</a></li>
+                </ul> <!--listview-->
+            </div> <!--Panel-->
 
-        <div data-role="header">
-            <h1>LearnIT</h1>
-            <a href="#panelUsuario" data-icon="bullets">Opciones</a>
-        </div><!-- /header -->
+            <div data-role="header">
+                <h1>LearnIT</h1>
+                <a href="#panelUsuario" data-icon="bullets">Options</a>
+            </div><!-- /header -->
 
-        <div role="main" class="ui-content">
-            <div class="ui-grid-b">
-                <div class="ui-block-a"></div>
-                <div class="ui-block-b">
-                    <h1>LearnIT - Inicio</h1>
-                    <form action="temas/crearTema">    
-                        <input type="submit" value="Crear Tema">
-                    </form>
-                    <form action="carrera/verCarrera">    
-                        <input type="submit" value="Ver Carrera">
-                    </form>
-                    <form action="carrera/verMaterias">    
-                        <input type="submit" value="Ver Materias">
-                    </form>
-                    <form action="materia/crearMateria">    
-                        <input type="submit" value="Crear Materia">
-                    </form>
+            <div role="main" class="ui-content">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b">
+                        <div><h1><center>Welcome {{ usuario }} !</center></h1></div>
+                        <div>
+                            <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                                <li data-role="list-divider">Subjects in {{ carrera }}</li>
+                                {% if lista_materias %}
+                                    {% for materia in lista_materias %}
+                                        <li data-icon="arrow-r"><a href="#">{{ materia }}</a></li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li>There are no subjects related to your major.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div>
+                            <p>You can add subjects with the options panel.</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-c"></div>
                 </div>
-                <div class="ui-block-c"></div>
             </div>
-        </div>
 
-    </div> <!--/mainPage-->
-            
-        </div>
-    </body>
+        </div> <!--/mainPage-->
+
+    </div>
+</body>
 </html>
