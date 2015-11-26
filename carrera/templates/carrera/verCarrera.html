@@ -19,8 +19,8 @@
     <div data-role="page" id="mainPage">
 
         <div data-role="header">
-            <a href="../.." data-icon="back" data-ajax="false">Regresar</a>
-            <h1>LearnIT</h1>
+            <a href="../.." data-icon="back" data-ajax="false">Go back</a>
+            <h1>LearnIT - My Profile</h1>
         </div><!-- /header -->
 
         <div role="main" class="ui-content">
@@ -30,13 +30,13 @@
                     <div>
                         <ul data-role="listview" data-inset="true" data-divider-theme="a">
                         <li data-role="list-divider">Perfil</li>
-                        <li>Nombre de usuario: {{ usuario }}</li>
-                        <li>Nombres: {{ nombres }}</li>
-                        <li>Apellidos: {{ apellidos }}</li>
-                        <li data-role="list-divider">Carrera</li>
+                        <li>Username: {{ usuario }}</li>
+                        <li>First Name: {{ nombres }}</li>
+                        <li>Last Name: {{ apellidos }}</li>
+                        <li data-role="list-divider">Major</li>
                         <li>
                             {{ carrera }}<br>
-                            <p>¿La carrera no te ha gustado? Puedes cambiar presionando <a href="#">aqui</a></p>
+                            <p>¿Didn't like the major? You can change it <a href="#">here</a></p>
                         </li>
                         </ul>
                     </div>

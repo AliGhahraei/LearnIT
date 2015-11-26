@@ -27,41 +27,36 @@
                         <p><b>{{ carrera }}</b></p>
                     </a></li>
 <!--                    <li><a href="carrera/verCarrera" data-ajax="false">Ir a cuenta</a></li> -->
-                    <li data-icon="plus"><a href="/materia/crearMateria" data-ajax="false">Agregar una Materia</a></li>
-                    <li data-icon="plus"><a href="/temas/crearTema" data-ajax="false">Agregar un Tema</a></li>
-                    <li data-icon="power"><a href="/login/logout" data-ajax="false">Salir</a></li>
+                    <li data-icon="plus"><a href="/materia/crearMateria" data-ajax="false">New Subject</a></li>
+                    <li data-icon="plus"><a href="/temas/crearTema" data-ajax="false">New Topic</a></li>
+                    <li data-icon="power"><a href="/login/logout" data-ajax="false">Log Out</a></li>
                 </ul> <!--listview-->
             </div> <!--Panel-->
 
             <div data-role="header">
                 <h1>LearnIT</h1>
-                <a href="#panelUsuario" data-icon="bullets">Opciones</a>
+                <a href="#panelUsuario" data-icon="bullets">Options</a>
             </div><!-- /header -->
 
             <div role="main" class="ui-content">
                 <div class="ui-grid-b">
                     <div class="ui-block-a"></div>
                     <div class="ui-block-b">
-                        <div><h1><center>Bienvenido {{ usuario }}</center></h1></div>
-                        {% if lista_materias %}
-                            <div>
-                                <ul data-role="listview" data-inset="true" data-divider-theme="a">
-                                    <li data-role="list-divider">Materias en {{ carrera }}</li>
+                        <div><h1><center>Welcome {{ usuario }} !</center></h1></div>
+                        <div>
+                            <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                                <li data-role="list-divider">Subjects in {{ carrera }}</li>
+                                {% if lista_materias %}
                                     {% for materia in lista_materias %}
                                         <li data-icon="arrow-r"><a href="#">{{ materia }}</a></li>
                                     {% endfor %}
-                                </ul>
-                            </div>
-                        {% else %}
-                            <div>
-                                <ul data-role="listview" data-inset="true" data-divider-theme="a">
-                                    <li data-role="list-divider">Materias en {{ carrera }}</li>
-                                    <li>No existen materias en la carrera selecccionada.</li>
-                                </ul>
-                            </div>
-                        {% endif %}
+                                {% else %}
+                                    <li>There are no subjects related to your major.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
                         <div>
-                            <p>Puedes crear materias adicionales desde el panel de opciones.</p>
+                            <p>You can add subjects with the options panel.</p>
                         </div>
                     </div>
                     <div class="ui-block-c"></div>
