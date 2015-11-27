@@ -44,15 +44,13 @@ def verTemas(request, idMateria):
 def crearMateria(request):
 	if request.method == 'POST':
 		formMateria = FormaMateria(request.POST, prefix='materia')
-
 		if formMateria.is_valid():
 			materia = formMateria.save()
 			relMateriasCarrera = Materias_Carrera()
-			relMateriasCarrera.carrera=carrera
+			relMateriasCarrera.carrera=request.user.usuario.carrera
 			relMateriasCarrera.materia=materia
 			relMateriasCarrera.save()
 			return HttpResponseRedirect('/')
-
 	else:
 		formMateria = FormaMateria(prefix='materia')
 
